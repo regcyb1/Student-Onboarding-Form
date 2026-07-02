@@ -306,18 +306,34 @@
         </div>
 
         <div class="field full">
-          <label>Are you doing any entrance preparation? <span class="req">*</span></label>
+          <label>Are you preparing for anything? <span class="req">*</span></label>
           <div class="radio-row">
-            <label><input type="radio" name="entrancePrep" value="Yes" id="entrancePrepYes" /> Yes</label>
-            <label><input type="radio" name="entrancePrep" value="No" id="entrancePrepNo" /> No</label>
+            <label><input type="radio" name="prepAnything" value="Yes" id="prepAnythingYes" /> Yes</label>
+            <label><input type="radio" name="prepAnything" value="No" id="prepAnythingNo" /> No</label>
           </div>
-          <small class="error" data-error-for="entrancePrep"></small>
+          <small class="error" data-error-for="prepAnything"></small>
         </div>
 
-        <div class="field full hidden" id="entranceInstituteWrap">
-          <label for="entranceInstitute">Which institute? <span class="req">*</span></label>
-          <input type="text" id="entranceInstitute" name="entranceInstitute" placeholder="Institute name" />
-          <small class="error" data-error-for="entranceInstitute"></small>
+        <div class="field full hidden" id="prepTypeWrap">
+          <label>What are you preparing for? <span class="req">*</span></label>
+          <div class="check-grid" data-group="prepType">
+            <label><input type="checkbox" name="prepType" value="Entrance" id="prepTypeEntrance" /> Entrance</label>
+            <label><input type="checkbox" name="prepType" value="IELTS" id="prepTypeIelts" /> IELTS</label>
+            <label><input type="checkbox" name="prepType" value="Abroad" id="prepTypeAbroad" /> Abroad</label>
+          </div>
+          <small class="error" data-error-for="prepType"></small>
+        </div>
+
+        <div class="field full hidden" id="prepAcademyWrap">
+          <label for="prepAcademy">Which academy? <span class="req">*</span></label>
+          <input type="text" id="prepAcademy" name="prepAcademy" placeholder="Academy name" />
+          <small class="error" data-error-for="prepAcademy"></small>
+        </div>
+
+        <div class="field full hidden" id="prepCountryWrap">
+          <label for="prepCountry">Which country? <span class="req">*</span></label>
+          <input type="text" id="prepCountry" name="prepCountry" placeholder="Country name" />
+          <small class="error" data-error-for="prepCountry"></small>
         </div>
       </section>
 

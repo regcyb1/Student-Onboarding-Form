@@ -71,8 +71,10 @@ var HEADERS = [
   "Father Email",
   "Mother Contact Number",
   "Mother Email",
-  "Entrance Prep",
-  "Entrance Prep Institute"
+  "Preparing Anything",
+  "Preparation Type",
+  "Preparation Academy",
+  "Preparation Country"
 ];
 
 /**
@@ -140,8 +142,10 @@ function doPost(e) {
       data.fatherEmail || "",
       data.motherContact || "",
       data.motherEmail || "",
-      data.entrancePrep || "",
-      data.entranceInstitute || ""
+      data.prepAnything || "",
+      data.prepType || "",
+      data.prepAcademy || "",
+      data.prepCountry || ""
     ];
 
     sheet.appendRow(row);

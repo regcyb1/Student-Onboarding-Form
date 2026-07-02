@@ -175,13 +175,28 @@ function setupConditionalFields() {
     toggle(otherSkillsWrap, skillsOther.checked);
   });
 
-  // Entrance prep "Yes" -> which institute
-  const entranceInstituteWrap = document.getElementById("entranceInstituteWrap");
-  const entrancePrepYes = document.getElementById("entrancePrepYes");
-  document.querySelectorAll('[name="entrancePrep"]').forEach((r) => {
-    r.addEventListener("change", () => {
-      toggle(entranceInstituteWrap, entrancePrepYes.checked);
-    });
+  // Preparation cascade: prepAnything -> prepType -> academy / country
+  const prepTypeWrap = document.getElementById("prepTypeWrap");
+  const prepAcademyWrap = document.getElementById("prepAcademyWrap");
+  const prepCountryWrap = document.getElementById("prepCountryWrap");
+  const prepAnythingYes = document.getElementById("prepAnythingYes");
+  const prepTypeEntrance = document.getElementById("prepTypeEntrance");
+  const prepTypeIelts = document.getElementById("prepTypeIelts");
+  const prepTypeAbroad = document.getElementById("prepTypeAbroad");
+
+  function refreshPrep() {
+    const yes = prepAnythingYes.checked;
+    toggle(prepTypeWrap, yes);
+    // Academy shown for Entrance or IELTS; country for Abroad. Only when "Yes".
+    toggle(prepAcademyWrap, yes && (prepTypeEntrance.checked || prepTypeIelts.checked));
+    toggle(prepCountryWrap, yes && prepTypeAbroad.checked);
+  }
+
+  document.querySelectorAll('[name="prepAnything"]').forEach((r) => {
+    r.addEventListener("change", refreshPrep);
+  });
+  document.querySelectorAll('[name="prepType"]').forEach((c) => {
+    c.addEventListener("change", refreshPrep);
   });
 }
 
@@ -346,14 +361,23 @@ function validateForm() {
     fail("motherEmail", "Please enter a valid email address.");
   }
 
-  // Entrance prep: required radio; institute required when "Yes"
-  if (!radio("entrancePrep")) {
-    fail("entrancePrep", "Please select an option.");
-  } else if (
-    document.getElementById("entrancePrepYes").checked &&
-    !val("entranceInstitute")
-  ) {
-    fail("entranceInstitute", "Please specify the institute.");
+  // Preparation cascade
+  if (!radio("prepAnything")) {
+    fail("prepAnything", "Please select an option.");
+  } else if (document.getElementById("prepAnythingYes").checked) {
+    if (checkCount("prepType") === 0) {
+      fail("prepType", "Please select at least one option.");
+    }
+    if (
+      (document.getElementById("prepTypeEntrance").checked ||
+        document.getElementById("prepTypeIelts").checked) &&
+      !val("prepAcademy")
+    ) {
+      fail("prepAcademy", "Please specify the academy.");
+    }
+    if (document.getElementById("prepTypeAbroad").checked && !val("prepCountry")) {
+      fail("prepCountry", "Please specify the country.");
+    }
   }
 
   // GPA range 0-4 (already checked non-empty above)
@@ -470,8 +494,10 @@ function collectData() {
     otherDiscovery: getValue("otherDiscovery"),
     enrollmentFactors: getChecks("enrollmentFactors"),
     otherCollegesConsidered: getRadio("otherCollegesConsidered"),
-    entrancePrep: getRadio("entrancePrep"),
-    entranceInstitute: getValue("entranceInstitute"),
+    prepAnything: getRadio("prepAnything"),
+    prepType: getChecks("prepType"),
+    prepAcademy: getValue("prepAcademy"),
+    prepCountry: getValue("prepCountry"),
     primaryInterest: getValue("primaryInterest"),
     bachelorGoal: getRadio("bachelorGoal"),
     otherBachelorGoal: getValue("otherBachelorGoal"),
@@ -590,7 +616,7 @@ function resetFormState() {
   document.getElementById("tempProvince").disabled = false;
 
   // Hide all conditional "Other" fields
-  ["otherStreamWrap", "otherDiscoveryWrap", "otherBachelorGoalWrap", "otherSkillsWrap", "entranceInstituteWrap"]
+  ["otherStreamWrap", "otherDiscoveryWrap", "otherBachelorGoalWrap", "otherSkillsWrap", "prepTypeWrap", "prepAcademyWrap", "prepCountryWrap"]
     .forEach((id) => document.getElementById(id).classList.add("hidden"));
 }
 
