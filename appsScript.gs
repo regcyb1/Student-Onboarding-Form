@@ -43,8 +43,17 @@ var HEADERS = [
   "Other Stream",
   "Computer Science Studied",
   "GPA",
+  "Preparing Anything",
+  "Preparation Type",
+  "Entrance Institute",
+  "Abroad Tests",
+  "Abroad Country",
   "Father Name",
+  "Father Contact Number",
+  "Father Email",
   "Mother Name",
+  "Mother Contact Number",
+  "Mother Email",
   "Guardian Contact Number",
   "Father Occupation",
   "Mother Occupation",
@@ -66,16 +75,7 @@ var HEADERS = [
   "Name of Official",
   "Interview Date",
   "Signature Name",
-  "Recorded By",
-  "Father Contact Number",
-  "Father Email",
-  "Mother Contact Number",
-  "Mother Email",
-  "Preparing Anything",
-  "Preparation Type",
-  "Entrance Institute",
-  "Abroad Tests",
-  "Abroad Country"
+  "Recorded By"
 ];
 
 /**
@@ -115,8 +115,17 @@ function doPost(e) {
       data.otherStream || "",
       data.csStudied || "",
       data.gpa || "",
+      data.prepAnything || "",
+      data.prepType || "",
+      data.prepInstitute || "",
+      data.abroadTest || "",
+      data.prepCountry || "",
       data.fatherName || "",
+      data.fatherContact || "",
+      data.fatherEmail || "",
       data.motherName || "",
+      data.motherContact || "",
+      data.motherEmail || "",
       data.guardianContact || "",
       data.fatherOccupation || "",
       data.motherOccupation || "",
@@ -138,16 +147,7 @@ function doPost(e) {
       data.officialName || "",
       data.interviewDate || "",
       data.signatureName || "",
-      data.recordedBy || "",
-      data.fatherContact || "",
-      data.fatherEmail || "",
-      data.motherContact || "",
-      data.motherEmail || "",
-      data.prepAnything || "",
-      data.prepType || "",
-      data.prepInstitute || "",
-      data.abroadTest || "",
-      data.prepCountry || ""
+      data.recordedBy || ""
     ];
 
     sheet.appendRow(row);
@@ -181,14 +181,59 @@ function getSheet() {
 }
 
 /**
- * Write the header row once, if the sheet is empty.
+ * Ensure the sheet columns match HEADERS, in the exact HEADERS order.
+ *
+ * Empty sheet -> write all headers.
+ * Existing sheet whose header row already equals HEADERS -> no-op (cheap
+ *   compare, no write).
+ * Existing sheet in a different shape/order -> migrate: rebuild every row
+ *   by matching the OLD header label to its NEW position. This realigns
+ *   old rows instead of just relabeling columns, so data added later (e.g.
+ *   Father/Mother contact + email, the prep / entrance / abroad fields)
+ *   and any reordering land under the right headers. Columns present in
+ *   the old sheet but not in HEADERS are dropped; new headers get "".
  */
 function ensureHeaders(sheet) {
   if (sheet.getLastRow() === 0) {
     sheet.appendRow(HEADERS);
     sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight("bold");
     sheet.setFrozenRows(1);
+    return;
   }
+
+  var lastRow = sheet.getLastRow();
+  var lastCol = sheet.getLastColumn();
+  var range = sheet.getRange(1, 1, lastRow, lastCol).getValues();
+  var oldHeaders = range[0];
+
+  // Already correct? (right width + same labels in order) -> nothing to do.
+  var aligned = oldHeaders.length === HEADERS.length;
+  if (aligned) {
+    for (var i = 0; i < HEADERS.length; i++) {
+      if (oldHeaders[i] !== HEADERS[i]) { aligned = false; break; }
+    }
+  }
+  if (aligned) return;
+
+  // Map each old header label -> its column index.
+  var indexOf = {};
+  oldHeaders.forEach(function (label, i) {
+    if (label !== "" && !(label in indexOf)) indexOf[label] = i;
+  });
+
+  // Rebuild every row (including the header row) in HEADERS order.
+  var rebuilt = range.map(function (rowArr, r) {
+    return HEADERS.map(function (label) {
+      if (r === 0) return label;              // header row
+      var src = indexOf[label];
+      return src === undefined ? "" : rowArr[src];
+    });
+  });
+
+  sheet.clearContents();
+  sheet.getRange(1, 1, rebuilt.length, HEADERS.length).setValues(rebuilt);
+  sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight("bold");
+  sheet.setFrozenRows(1);
 }
 
 /**

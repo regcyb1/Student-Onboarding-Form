@@ -43,14 +43,22 @@ Permanent Province, Permanent District, Permanent Municipality,
 Temporary Province, Temporary District, Temporary Municipality,
 Plus Two College Name, Plus Two College Province, Plus Two College District,
 Stream, Other Stream, Computer Science Studied, GPA,
-Father Name, Mother Name, Guardian Contact Number, Father Occupation,
-Mother Occupation, Annual Family Income, Siblings Details,
+Preparing Anything, Preparation Type, Entrance Institute, Abroad Tests, Abroad Country,
+Father Name, Father Contact Number, Father Email,
+Mother Name, Mother Contact Number, Mother Email,
+Guardian Contact Number, Father Occupation, Mother Occupation,
+Annual Family Income, Siblings Details,
 Discovery Sources, Other Discovery Source, Enrollment Factors,
 Other Colleges Considered, Primary Area of Interest, Bachelor Goal,
 Other Bachelor Goal, Expected College Support, Motivation Rating,
 Interested Clubs, Existing Skills, Other Skills, Overall Remarks,
 Name of Official, Interview Date, Signature Name, Recorded By
 ```
+
+> If you edit `HEADERS` later (add/reorder columns), the backend
+> auto-migrates the sheet on the next submission: it rebuilds every row by
+> matching old header labels to their new position, so existing data stays
+> aligned. Columns removed from `HEADERS` are dropped.
 
 ### 4. Paste the Apps Script code
 1. In the spreadsheet menu, click **Extensions → Apps Script**.
