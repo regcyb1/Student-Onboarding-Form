@@ -174,6 +174,15 @@ function setupConditionalFields() {
   skillsOther.addEventListener("change", () => {
     toggle(otherSkillsWrap, skillsOther.checked);
   });
+
+  // Entrance prep "Yes" -> which institute
+  const entranceInstituteWrap = document.getElementById("entranceInstituteWrap");
+  const entrancePrepYes = document.getElementById("entrancePrepYes");
+  document.querySelectorAll('[name="entrancePrep"]').forEach((r) => {
+    r.addEventListener("change", () => {
+      toggle(entranceInstituteWrap, entrancePrepYes.checked);
+    });
+  });
 }
 
 function toggle(el, show) {
@@ -306,10 +315,45 @@ function validateForm() {
     fail("guardianContact", "Guardian Contact Number must be exactly 10 digits.");
   }
 
-  // Email format (already checked non-empty above)
+  // Father Contact: required + exactly 10 digits
+  const fatherContact = val("fatherContact");
+  if (!fatherContact) {
+    fail("fatherContact", "Father Contact Number is required.");
+  } else if (!/^\d{10}$/.test(fatherContact)) {
+    fail("fatherContact", "Father Contact Number must be exactly 10 digits.");
+  }
+
+  // Mother Contact: required + exactly 10 digits
+  const motherContact = val("motherContact");
+  if (!motherContact) {
+    fail("motherContact", "Mother Contact Number is required.");
+  } else if (!/^\d{10}$/.test(motherContact)) {
+    fail("motherContact", "Mother Contact Number must be exactly 10 digits.");
+  }
+
+  // Email formats. Student email required (checked above); parent emails optional.
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const email = val("email");
-  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  if (email && !emailRe.test(email)) {
     fail("email", "Please enter a valid email address.");
+  }
+  const fatherEmail = val("fatherEmail");
+  if (fatherEmail && !emailRe.test(fatherEmail)) {
+    fail("fatherEmail", "Please enter a valid email address.");
+  }
+  const motherEmail = val("motherEmail");
+  if (motherEmail && !emailRe.test(motherEmail)) {
+    fail("motherEmail", "Please enter a valid email address.");
+  }
+
+  // Entrance prep: required radio; institute required when "Yes"
+  if (!radio("entrancePrep")) {
+    fail("entrancePrep", "Please select an option.");
+  } else if (
+    document.getElementById("entrancePrepYes").checked &&
+    !val("entranceInstitute")
+  ) {
+    fail("entranceInstitute", "Please specify the institute.");
   }
 
   // GPA range 0-4 (already checked non-empty above)
@@ -412,7 +456,11 @@ function collectData() {
     csStudied: getRadio("csStudied"),
     gpa: getValue("gpa"),
     fatherName: getValue("fatherName"),
+    fatherContact: getValue("fatherContact"),
+    fatherEmail: getValue("fatherEmail"),
     motherName: getValue("motherName"),
+    motherContact: getValue("motherContact"),
+    motherEmail: getValue("motherEmail"),
     guardianContact: getValue("guardianContact"),
     fatherOccupation: getValue("fatherOccupation"),
     motherOccupation: getValue("motherOccupation"),
@@ -422,6 +470,8 @@ function collectData() {
     otherDiscovery: getValue("otherDiscovery"),
     enrollmentFactors: getChecks("enrollmentFactors"),
     otherCollegesConsidered: getRadio("otherCollegesConsidered"),
+    entrancePrep: getRadio("entrancePrep"),
+    entranceInstitute: getValue("entranceInstitute"),
     primaryInterest: getValue("primaryInterest"),
     bachelorGoal: getRadio("bachelorGoal"),
     otherBachelorGoal: getValue("otherBachelorGoal"),
@@ -540,7 +590,7 @@ function resetFormState() {
   document.getElementById("tempProvince").disabled = false;
 
   // Hide all conditional "Other" fields
-  ["otherStreamWrap", "otherDiscoveryWrap", "otherBachelorGoalWrap", "otherSkillsWrap"]
+  ["otherStreamWrap", "otherDiscoveryWrap", "otherBachelorGoalWrap", "otherSkillsWrap", "entranceInstituteWrap"]
     .forEach((id) => document.getElementById(id).classList.add("hidden"));
 }
 

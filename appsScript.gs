@@ -66,7 +66,13 @@ var HEADERS = [
   "Name of Official",
   "Interview Date",
   "Signature Name",
-  "Recorded By"
+  "Recorded By",
+  "Father Contact Number",
+  "Father Email",
+  "Mother Contact Number",
+  "Mother Email",
+  "Entrance Prep",
+  "Entrance Prep Institute"
 ];
 
 /**
@@ -129,7 +135,13 @@ function doPost(e) {
       data.officialName || "",
       data.interviewDate || "",
       data.signatureName || "",
-      data.recordedBy || ""
+      data.recordedBy || "",
+      data.fatherContact || "",
+      data.fatherEmail || "",
+      data.motherContact || "",
+      data.motherEmail || "",
+      data.entrancePrep || "",
+      data.entranceInstitute || ""
     ];
 
     sheet.appendRow(row);

@@ -192,14 +192,14 @@
             <small class="error" data-error-for="fatherName"></small>
           </div>
           <div class="field">
-            <label for="motherName">Mother Name <span class="req">*</span></label>
-            <input type="text" id="motherName" name="motherName" />
-            <small class="error" data-error-for="motherName"></small>
+            <label for="fatherContact">Father Contact Number <span class="req">*</span></label>
+            <input type="text" id="fatherContact" name="fatherContact" placeholder="10 digit mobile number" />
+            <small class="error" data-error-for="fatherContact"></small>
           </div>
           <div class="field">
-            <label for="guardianContact">Guardian Contact Number <span class="req">*</span></label>
-            <input type="text" id="guardianContact" name="guardianContact" placeholder="10 digit mobile number" />
-            <small class="error" data-error-for="guardianContact"></small>
+            <label for="fatherEmail">Father Email <span class="hint">(optional)</span></label>
+            <input type="email" id="fatherEmail" name="fatherEmail" />
+            <small class="error" data-error-for="fatherEmail"></small>
           </div>
           <div class="field">
             <label for="fatherOccupation">Father Occupation <span class="req">*</span></label>
@@ -207,9 +207,29 @@
             <small class="error" data-error-for="fatherOccupation"></small>
           </div>
           <div class="field">
+            <label for="motherName">Mother Name <span class="req">*</span></label>
+            <input type="text" id="motherName" name="motherName" />
+            <small class="error" data-error-for="motherName"></small>
+          </div>
+          <div class="field">
+            <label for="motherContact">Mother Contact Number <span class="req">*</span></label>
+            <input type="text" id="motherContact" name="motherContact" placeholder="10 digit mobile number" />
+            <small class="error" data-error-for="motherContact"></small>
+          </div>
+          <div class="field">
+            <label for="motherEmail">Mother Email <span class="hint">(optional)</span></label>
+            <input type="email" id="motherEmail" name="motherEmail" />
+            <small class="error" data-error-for="motherEmail"></small>
+          </div>
+          <div class="field">
             <label for="motherOccupation">Mother Occupation <span class="req">*</span></label>
             <input type="text" id="motherOccupation" name="motherOccupation" />
             <small class="error" data-error-for="motherOccupation"></small>
+          </div>
+          <div class="field">
+            <label for="guardianContact">Guardian Contact Number <span class="req">*</span></label>
+            <input type="text" id="guardianContact" name="guardianContact" placeholder="10 digit mobile number" />
+            <small class="error" data-error-for="guardianContact"></small>
           </div>
           <div class="field">
             <label for="annualIncome">Annual Family Income <span class="req">*</span></label>
@@ -283,6 +303,21 @@
             <label><input type="radio" name="otherCollegesConsidered" value="More than 5" /> More than 5</label>
           </div>
           <small class="error" data-error-for="otherCollegesConsidered"></small>
+        </div>
+
+        <div class="field full">
+          <label>Are you doing any entrance preparation? <span class="req">*</span></label>
+          <div class="radio-row">
+            <label><input type="radio" name="entrancePrep" value="Yes" id="entrancePrepYes" /> Yes</label>
+            <label><input type="radio" name="entrancePrep" value="No" id="entrancePrepNo" /> No</label>
+          </div>
+          <small class="error" data-error-for="entrancePrep"></small>
+        </div>
+
+        <div class="field full hidden" id="entranceInstituteWrap">
+          <label for="entranceInstitute">Which institute? <span class="req">*</span></label>
+          <input type="text" id="entranceInstitute" name="entranceInstitute" placeholder="Institute name" />
+          <small class="error" data-error-for="entranceInstitute"></small>
         </div>
       </section>
 
