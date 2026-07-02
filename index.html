@@ -318,27 +318,29 @@
           <label>What are you preparing for? <span class="hint">(select all that apply)</span> <span class="req">*</span></label>
           <div class="check-grid" data-group="prepType">
             <label><input type="checkbox" name="prepType" value="Entrance" id="prepTypeEntrance" /> Entrance</label>
-            <label><input type="checkbox" name="prepType" value="IELTS" id="prepTypeIelts" /> IELTS</label>
             <label><input type="checkbox" name="prepType" value="Abroad" id="prepTypeAbroad" /> Abroad</label>
           </div>
           <small class="error" data-error-for="prepType"></small>
         </div>
 
-        <div class="field full hidden" id="prepAcademyWrap">
-          <label for="prepAcademy">Which academy? <span class="req">*</span></label>
-          <input type="text" id="prepAcademy" name="prepAcademy" list="academyList" placeholder="Type or pick the academy or coaching center" autocomplete="off" />
-          <datalist id="academyList">
-            <option value="Cushla Education"></option>
-            <option value="AECC"></option>
-            <option value="KIEC"></option>
-            <option value="Alfa Beta Institute"></option>
-            <option value="Global Reach"></option>
-            <option value="Elite Education"></option>
-            <option value="The Info"></option>
-            <option value="Aims International"></option>
-          </datalist>
-          <small class="hint">Not listed? Just type the name.</small>
-          <small class="error" data-error-for="prepAcademy"></small>
+        <div class="field full hidden" id="prepInstituteWrap">
+          <label for="prepInstitute">Entrance prep institute <span class="req">*</span></label>
+          <input type="text" id="prepInstitute" name="prepInstitute" placeholder="Name of the entrance prep institute" autocomplete="off" />
+          <small class="error" data-error-for="prepInstitute"></small>
+        </div>
+
+        <div class="field full hidden" id="abroadTestWrap">
+          <label>Which test are you preparing for? <span class="hint">(select all that apply)</span> <span class="req">*</span></label>
+          <div class="check-grid" data-group="abroadTest">
+            <label><input type="checkbox" name="abroadTest" value="IELTS" /> IELTS</label>
+            <label><input type="checkbox" name="abroadTest" value="TOEFL" /> TOEFL</label>
+            <label><input type="checkbox" name="abroadTest" value="PTE" /> PTE</label>
+            <label><input type="checkbox" name="abroadTest" value="GRE" /> GRE</label>
+            <label><input type="checkbox" name="abroadTest" value="GMAT" /> GMAT</label>
+            <label><input type="checkbox" name="abroadTest" value="SAT" /> SAT</label>
+            <label><input type="checkbox" name="abroadTest" value="Duolingo" /> Duolingo</label>
+          </div>
+          <small class="error" data-error-for="abroadTest"></small>
         </div>
 
         <div class="field full hidden" id="prepCountryWrap">

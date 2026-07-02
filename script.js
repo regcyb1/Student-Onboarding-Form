@@ -175,24 +175,25 @@ function setupConditionalFields() {
     toggle(otherSkillsWrap, skillsOther.checked);
   });
 
-  // Preparation cascade: prepAnything -> prepType -> academy / country
+  // Preparation cascade: prepAnything -> prepType -> institute / test + country
   const prepTypeWrap = document.getElementById("prepTypeWrap");
-  const prepAcademyWrap = document.getElementById("prepAcademyWrap");
+  const prepInstituteWrap = document.getElementById("prepInstituteWrap");
+  const abroadTestWrap = document.getElementById("abroadTestWrap");
   const prepCountryWrap = document.getElementById("prepCountryWrap");
   const prepAnythingYes = document.getElementById("prepAnythingYes");
   const prepTypeEntrance = document.getElementById("prepTypeEntrance");
-  const prepTypeIelts = document.getElementById("prepTypeIelts");
   const prepTypeAbroad = document.getElementById("prepTypeAbroad");
 
   function refreshPrep() {
     const yes = prepAnythingYes.checked;
-    const showAcademy = yes && (prepTypeEntrance.checked || prepTypeIelts.checked);
-    const showCountry = yes && prepTypeAbroad.checked;
+    const showInstitute = yes && prepTypeEntrance.checked;
+    const showAbroad = yes && prepTypeAbroad.checked;
 
     toggle(prepTypeWrap, yes);
-    // Academy shown for Entrance or IELTS; country for Abroad. Only when "Yes".
-    toggle(prepAcademyWrap, showAcademy);
-    toggle(prepCountryWrap, showCountry);
+    // Entrance -> institute; Abroad -> which test + which country.
+    toggle(prepInstituteWrap, showInstitute);
+    toggle(abroadTestWrap, showAbroad);
+    toggle(prepCountryWrap, showAbroad);
 
     // Clear values that are no longer visible so stale data is not submitted.
     if (!yes) {
@@ -201,12 +202,16 @@ function setupConditionalFields() {
         .forEach((c) => (c.checked = false));
       clearFieldError("prepType");
     }
-    if (!showAcademy) {
-      document.getElementById("prepAcademy").value = "";
-      clearFieldError("prepAcademy");
+    if (!showInstitute) {
+      document.getElementById("prepInstitute").value = "";
+      clearFieldError("prepInstitute");
     }
-    if (!showCountry) {
+    if (!showAbroad) {
+      document
+        .querySelectorAll('[name="abroadTest"]:checked')
+        .forEach((c) => (c.checked = false));
       document.getElementById("prepCountry").value = "";
+      clearFieldError("abroadTest");
       clearFieldError("prepCountry");
     }
   }
@@ -387,15 +392,18 @@ function validateForm() {
     if (checkCount("prepType") === 0) {
       fail("prepType", "Please select at least one option.");
     }
-    if (
-      (document.getElementById("prepTypeEntrance").checked ||
-        document.getElementById("prepTypeIelts").checked) &&
-      !val("prepAcademy")
-    ) {
-      fail("prepAcademy", "Please specify the academy.");
+    // Entrance -> institute required
+    if (document.getElementById("prepTypeEntrance").checked && !val("prepInstitute")) {
+      fail("prepInstitute", "Please specify the entrance prep institute.");
     }
-    if (document.getElementById("prepTypeAbroad").checked && !val("prepCountry")) {
-      fail("prepCountry", "Please specify the country.");
+    // Abroad -> at least one test + country required
+    if (document.getElementById("prepTypeAbroad").checked) {
+      if (checkCount("abroadTest") === 0) {
+        fail("abroadTest", "Please select at least one test.");
+      }
+      if (!val("prepCountry")) {
+        fail("prepCountry", "Please specify the country.");
+      }
     }
   }
 
@@ -515,7 +523,8 @@ function collectData() {
     otherCollegesConsidered: getRadio("otherCollegesConsidered"),
     prepAnything: getRadio("prepAnything"),
     prepType: getChecks("prepType"),
-    prepAcademy: getValue("prepAcademy"),
+    prepInstitute: getValue("prepInstitute"),
+    abroadTest: getChecks("abroadTest"),
     prepCountry: getValue("prepCountry"),
     primaryInterest: getValue("primaryInterest"),
     bachelorGoal: getRadio("bachelorGoal"),
@@ -635,7 +644,7 @@ function resetFormState() {
   document.getElementById("tempProvince").disabled = false;
 
   // Hide all conditional "Other" fields
-  ["otherStreamWrap", "otherDiscoveryWrap", "otherBachelorGoalWrap", "otherSkillsWrap", "prepTypeWrap", "prepAcademyWrap", "prepCountryWrap"]
+  ["otherStreamWrap", "otherDiscoveryWrap", "otherBachelorGoalWrap", "otherSkillsWrap", "prepTypeWrap", "prepInstituteWrap", "abroadTestWrap", "prepCountryWrap"]
     .forEach((id) => document.getElementById(id).classList.add("hidden"));
 }
 

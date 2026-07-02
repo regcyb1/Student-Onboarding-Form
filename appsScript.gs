@@ -73,8 +73,9 @@ var HEADERS = [
   "Mother Email",
   "Preparing Anything",
   "Preparation Type",
-  "Preparation Academy",
-  "Preparation Country"
+  "Entrance Institute",
+  "Abroad Tests",
+  "Abroad Country"
 ];
 
 /**
@@ -144,7 +145,8 @@ function doPost(e) {
       data.motherEmail || "",
       data.prepAnything || "",
       data.prepType || "",
-      data.prepAcademy || "",
+      data.prepInstitute || "",
+      data.abroadTest || "",
       data.prepCountry || ""
     ];
 
