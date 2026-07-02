@@ -186,10 +186,29 @@ function setupConditionalFields() {
 
   function refreshPrep() {
     const yes = prepAnythingYes.checked;
+    const showAcademy = yes && (prepTypeEntrance.checked || prepTypeIelts.checked);
+    const showCountry = yes && prepTypeAbroad.checked;
+
     toggle(prepTypeWrap, yes);
     // Academy shown for Entrance or IELTS; country for Abroad. Only when "Yes".
-    toggle(prepAcademyWrap, yes && (prepTypeEntrance.checked || prepTypeIelts.checked));
-    toggle(prepCountryWrap, yes && prepTypeAbroad.checked);
+    toggle(prepAcademyWrap, showAcademy);
+    toggle(prepCountryWrap, showCountry);
+
+    // Clear values that are no longer visible so stale data is not submitted.
+    if (!yes) {
+      document
+        .querySelectorAll('[name="prepType"]:checked')
+        .forEach((c) => (c.checked = false));
+      clearFieldError("prepType");
+    }
+    if (!showAcademy) {
+      document.getElementById("prepAcademy").value = "";
+      clearFieldError("prepAcademy");
+    }
+    if (!showCountry) {
+      document.getElementById("prepCountry").value = "";
+      clearFieldError("prepCountry");
+    }
   }
 
   document.querySelectorAll('[name="prepAnything"]').forEach((r) => {

@@ -315,7 +315,7 @@
         </div>
 
         <div class="field full hidden" id="prepTypeWrap">
-          <label>What are you preparing for? <span class="req">*</span></label>
+          <label>What are you preparing for? <span class="hint">(select all that apply)</span> <span class="req">*</span></label>
           <div class="check-grid" data-group="prepType">
             <label><input type="checkbox" name="prepType" value="Entrance" id="prepTypeEntrance" /> Entrance</label>
             <label><input type="checkbox" name="prepType" value="IELTS" id="prepTypeIelts" /> IELTS</label>
@@ -326,13 +326,43 @@
 
         <div class="field full hidden" id="prepAcademyWrap">
           <label for="prepAcademy">Which academy? <span class="req">*</span></label>
-          <input type="text" id="prepAcademy" name="prepAcademy" placeholder="Academy name" />
+          <input type="text" id="prepAcademy" name="prepAcademy" list="academyList" placeholder="Type or pick the academy or coaching center" autocomplete="off" />
+          <datalist id="academyList">
+            <option value="Cushla Education"></option>
+            <option value="AECC"></option>
+            <option value="KIEC"></option>
+            <option value="Alfa Beta Institute"></option>
+            <option value="Global Reach"></option>
+            <option value="Elite Education"></option>
+            <option value="The Info"></option>
+            <option value="Aims International"></option>
+          </datalist>
+          <small class="hint">Not listed? Just type the name.</small>
           <small class="error" data-error-for="prepAcademy"></small>
         </div>
 
         <div class="field full hidden" id="prepCountryWrap">
           <label for="prepCountry">Which country? <span class="req">*</span></label>
-          <input type="text" id="prepCountry" name="prepCountry" placeholder="Country name" />
+          <input type="text" id="prepCountry" name="prepCountry" list="countryList" placeholder="Type or pick a country" autocomplete="off" />
+          <datalist id="countryList">
+            <option value="Australia"></option>
+            <option value="United States"></option>
+            <option value="United Kingdom"></option>
+            <option value="Canada"></option>
+            <option value="Japan"></option>
+            <option value="South Korea"></option>
+            <option value="Germany"></option>
+            <option value="New Zealand"></option>
+            <option value="Ireland"></option>
+            <option value="France"></option>
+            <option value="Finland"></option>
+            <option value="Denmark"></option>
+            <option value="India"></option>
+            <option value="China"></option>
+            <option value="Malta"></option>
+            <option value="United Arab Emirates"></option>
+          </datalist>
+          <small class="hint">Not listed? Just type the country name.</small>
           <small class="error" data-error-for="prepCountry"></small>
         </div>
       </section>
