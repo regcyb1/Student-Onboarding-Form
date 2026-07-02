@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Onboarding Entry System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Page header -->
+  <header class="page-header">
+    <div class="header-inner">
+      <h1>Student Onboarding Entry System</h1>
+      <p>Enter new student profile details and save directly to Google Sheet.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <form id="onboardingForm" novalidate>
+
+      <!-- ============================================================= -->
+      <!-- SECTION 1: Personal and Contact Information                   -->
+      <!-- ============================================================= -->
+      <section class="card">
+        <h2 class="card-title">1. Personal and Contact Information</h2>
+        <div class="grid">
+
+          <div class="field">
+            <label for="fullName">Full Name <span class="req">*</span></label>
+            <input type="text" id="fullName" name="fullName" placeholder="e.g. Sita Sharma" />
+            <small class="error" data-error-for="fullName"></small>
+          </div>
+
+          <div class="field">
+            <label for="studentId">Student ID <span class="req">*</span></label>
+            <input type="text" id="studentId" name="studentId" />
+            <small class="error" data-error-for="studentId"></small>
+          </div>
+
+          <div class="field">
+            <label for="contactNumber">Contact Number <span class="req">*</span></label>
+            <input type="text" id="contactNumber" name="contactNumber" placeholder="10 digit mobile number" />
+            <small class="error" data-error-for="contactNumber"></small>
+          </div>
+
+          <div class="field">
+            <label for="email">Email Address <span class="req">*</span></label>
+            <input type="email" id="email" name="email" />
+            <small class="error" data-error-for="email"></small>
+          </div>
+        </div>
+
+        <!-- Permanent Address -->
+        <h3 class="sub-title">Permanent Address</h3>
+        <div class="grid">
+          <div class="field">
+            <label for="permProvince">Province <span class="req">*</span></label>
+            <select id="permProvince" name="permProvince" data-role="province" data-group="perm">
+              <option value="">Select Province</option>
+            </select>
+            <small class="error" data-error-for="permProvince"></small>
+          </div>
+
+          <div class="field">
+            <label for="permDistrict">District <span class="req">*</span></label>
+            <select id="permDistrict" name="permDistrict" data-role="district" data-group="perm" disabled>
+              <option value="">Select District</option>
+            </select>
+            <small class="error" data-error-for="permDistrict"></small>
+          </div>
+
+          <div class="field">
+            <label for="permMunicipality">Municipality <span class="req">*</span></label>
+            <select id="permMunicipality" name="permMunicipality" data-role="municipality" data-group="perm" disabled>
+              <option value="">Select Municipality</option>
+            </select>
+            <small class="error" data-error-for="permMunicipality"></small>
+          </div>
+        </div>
+
+        <!-- Temporary Address -->
+        <h3 class="sub-title">Temporary Address</h3>
+        <div class="field checkbox-inline">
+          <label>
+            <input type="checkbox" id="sameAsPermanent" name="sameAsPermanent" />
+            Same as Permanent Address
+          </label>
+        </div>
+        <div class="grid">
+          <div class="field">
+            <label for="tempProvince">Province <span class="req">*</span></label>
+            <select id="tempProvince" name="tempProvince" data-role="province" data-group="temp">
+              <option value="">Select Province</option>
+            </select>
+            <small class="error" data-error-for="tempProvince"></small>
+          </div>
+
+          <div class="field">
+            <label for="tempDistrict">District <span class="req">*</span></label>
+            <select id="tempDistrict" name="tempDistrict" data-role="district" data-group="temp" disabled>
+              <option value="">Select District</option>
+            </select>
+            <small class="error" data-error-for="tempDistrict"></small>
+          </div>
+
+          <div class="field">
+            <label for="tempMunicipality">Municipality <span class="req">*</span></label>
+            <select id="tempMunicipality" name="tempMunicipality" data-role="municipality" data-group="temp" disabled>
+              <option value="">Select Municipality</option>
+            </select>
+            <small class="error" data-error-for="tempMunicipality"></small>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================= -->
+      <!-- SECTION 2: Academic Background                                 -->
+      <!-- ============================================================= -->
+      <section class="card">
+        <h2 class="card-title">2. Academic Background</h2>
+        <div class="grid">
+          <div class="field">
+            <label for="plusTwoCollege">Plus Two College Name <span class="req">*</span></label>
+            <input type="text" id="plusTwoCollege" name="plusTwoCollege" />
+            <small class="error" data-error-for="plusTwoCollege"></small>
+          </div>
+
+          <div class="field">
+            <label for="plusTwoProvince">Plus Two College Province <span class="req">*</span></label>
+            <select id="plusTwoProvince" name="plusTwoProvince" data-role="province" data-group="plusTwo">
+              <option value="">Select Province</option>
+            </select>
+            <small class="error" data-error-for="plusTwoProvince"></small>
+          </div>
+
+          <div class="field">
+            <label for="plusTwoDistrict">Plus Two College District <span class="req">*</span></label>
+            <select id="plusTwoDistrict" name="plusTwoDistrict" data-role="district" data-group="plusTwo" disabled>
+              <option value="">Select District</option>
+            </select>
+            <small class="error" data-error-for="plusTwoDistrict"></small>
+          </div>
+
+          <div class="field">
+            <label for="stream">Stream <span class="req">*</span></label>
+            <select id="stream" name="stream">
+              <option value="">Select Stream</option>
+              <option value="Science">Science</option>
+              <option value="Management">Management</option>
+              <option value="Humanities or Arts">Humanities or Arts</option>
+              <option value="Education">Education</option>
+              <option value="Technical Stream">Technical Stream</option>
+              <option value="CTEVT Diploma">CTEVT Diploma</option>
+              <option value="Other">Other</option>
+            </select>
+            <small class="error" data-error-for="stream"></small>
+          </div>
+
+          <div class="field hidden" id="otherStreamWrap">
+            <label for="otherStream">Other Stream <span class="req">*</span></label>
+            <input type="text" id="otherStream" name="otherStream" placeholder="Please specify" />
+            <small class="error" data-error-for="otherStream"></small>
+          </div>
+
+          <div class="field">
+            <label>Did the student study Computer Science domain subjects? <span class="req">*</span></label>
+            <div class="radio-row">
+              <label><input type="radio" name="csStudied" value="Yes" /> Yes</label>
+              <label><input type="radio" name="csStudied" value="No" /> No</label>
+            </div>
+            <small class="error" data-error-for="csStudied"></small>
+          </div>
+
+          <div class="field">
+            <label for="gpa">GPA in Plus Two or Equivalent <span class="req">*</span></label>
+            <input type="number" id="gpa" name="gpa" step="0.01" min="0" max="4" placeholder="0.00 - 4.00" />
+            <small class="error" data-error-for="gpa"></small>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================= -->
+      <!-- SECTION 3: Family Background and Support System                -->
+      <!-- ============================================================= -->
+      <section class="card">
+        <h2 class="card-title">3. Family Background and Support System</h2>
+        <div class="grid">
+          <div class="field">
+            <label for="fatherName">Father Name <span class="req">*</span></label>
+            <input type="text" id="fatherName" name="fatherName" />
+            <small class="error" data-error-for="fatherName"></small>
+          </div>
+          <div class="field">
+            <label for="motherName">Mother Name <span class="req">*</span></label>
+            <input type="text" id="motherName" name="motherName" />
+            <small class="error" data-error-for="motherName"></small>
+          </div>
+          <div class="field">
+            <label for="guardianContact">Guardian Contact Number <span class="req">*</span></label>
+            <input type="text" id="guardianContact" name="guardianContact" placeholder="10 digit mobile number" />
+            <small class="error" data-error-for="guardianContact"></small>
+          </div>
+          <div class="field">
+            <label for="fatherOccupation">Father Occupation <span class="req">*</span></label>
+            <input type="text" id="fatherOccupation" name="fatherOccupation" />
+            <small class="error" data-error-for="fatherOccupation"></small>
+          </div>
+          <div class="field">
+            <label for="motherOccupation">Mother Occupation <span class="req">*</span></label>
+            <input type="text" id="motherOccupation" name="motherOccupation" />
+            <small class="error" data-error-for="motherOccupation"></small>
+          </div>
+          <div class="field">
+            <label for="annualIncome">Annual Family Income <span class="req">*</span></label>
+            <select id="annualIncome" name="annualIncome">
+              <option value="">Select Income Range</option>
+              <option value="Below NPR 3 Lakhs">Below NPR 3 Lakhs</option>
+              <option value="NPR 3 Lakhs to 6 Lakhs">NPR 3 Lakhs to 6 Lakhs</option>
+              <option value="NPR 6 Lakhs to 10 Lakhs">NPR 6 Lakhs to 10 Lakhs</option>
+              <option value="NPR 10 Lakhs to 15 Lakhs">NPR 10 Lakhs to 15 Lakhs</option>
+              <option value="Above NPR 15 Lakhs">Above NPR 15 Lakhs</option>
+              <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+            <small class="error" data-error-for="annualIncome"></small>
+          </div>
+          <div class="field full">
+            <label for="siblingsDetails">Number of Siblings and their Education Level <span class="req">*</span></label>
+            <textarea id="siblingsDetails" name="siblingsDetails" rows="2" placeholder="e.g. 2 siblings - one in Bachelor, one in Grade 10"></textarea>
+            <small class="error" data-error-for="siblingsDetails"></small>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================= -->
+      <!-- SECTION 4: College Discovery and Motivation                   -->
+      <!-- ============================================================= -->
+      <section class="card">
+        <h2 class="card-title">4. College Discovery and Motivation</h2>
+
+        <div class="field full">
+          <label>How did the student first hear about the college? <span class="req">*</span></label>
+          <div class="check-grid" data-group="discovery">
+            <label><input type="checkbox" name="discoverySources" value="Social Media and Website" /> Social Media and Website</label>
+            <label><input type="checkbox" name="discoverySources" value="Techspire College Students" /> Techspire College Students</label>
+            <label><input type="checkbox" name="discoverySources" value="Friends, Family, or Seniors" /> Friends, Family, or Seniors</label>
+            <label><input type="checkbox" name="discoverySources" value="High School Teachers" /> High School Teachers</label>
+            <label><input type="checkbox" name="discoverySources" value="Educational Fair or Exhibition" /> Educational Fair or Exhibition</label>
+            <label><input type="checkbox" name="discoverySources" value="News, Hoarding Board, or Physical Advertisement" /> News, Hoarding Board, or Physical Advertisement</label>
+            <label><input type="checkbox" name="discoverySources" value="Other" id="discoveryOther" /> Other</label>
+          </div>
+          <small class="error" data-error-for="discoverySources"></small>
+        </div>
+
+        <div class="field full hidden" id="otherDiscoveryWrap">
+          <label for="otherDiscovery">Other Discovery Source <span class="req">*</span></label>
+          <input type="text" id="otherDiscovery" name="otherDiscovery" placeholder="Please specify" />
+          <small class="error" data-error-for="otherDiscovery"></small>
+        </div>
+
+        <div class="field full">
+          <label>What factors attracted the student most to enroll here? <span class="hint">(Choose up to 3)</span> <span class="req">*</span></label>
+          <div class="check-grid" data-group="factors">
+            <label><input type="checkbox" name="enrollmentFactors" value="Academic Reputation and Quality of Faculty" /> Academic Reputation and Quality of Faculty</label>
+            <label><input type="checkbox" name="enrollmentFactors" value="Affiliated University or Curriculum Offered" /> Affiliated University or Curriculum Offered</label>
+            <label><input type="checkbox" name="enrollmentFactors" value="Scholarship Offered" /> Scholarship Offered</label>
+            <label><input type="checkbox" name="enrollmentFactors" value="Infrastructure and Facilities" /> Infrastructure and Facilities</label>
+            <label><input type="checkbox" name="enrollmentFactors" value="Affordable Fee" /> Affordable Fee</label>
+            <label><input type="checkbox" name="enrollmentFactors" value="Location and Accessibility" /> Location and Accessibility</label>
+            <label><input type="checkbox" name="enrollmentFactors" value="Career Placement, Internships, and Industry Connections" /> Career Placement, Internships, and Industry Connections</label>
+            <label><input type="checkbox" name="enrollmentFactors" value="Vibrant Campus Life, Clubs, and Extra Curricular Activities" /> Vibrant Campus Life, Clubs, and Extra Curricular Activities</label>
+            <label><input type="checkbox" name="enrollmentFactors" value="Recommendation from Someone I Trust" /> Recommendation from Someone I Trust</label>
+          </div>
+          <small class="error" data-error-for="enrollmentFactors"></small>
+        </div>
+
+        <div class="field full">
+          <label>Before finalizing this college, how many other colleges did the student consider? <span class="req">*</span></label>
+          <div class="radio-row wrap">
+            <label><input type="radio" name="otherCollegesConsidered" value="This was my first and only choice" /> This was my first and only choice</label>
+            <label><input type="radio" name="otherCollegesConsidered" value="1 to 2 others" /> 1 to 2 others</label>
+            <label><input type="radio" name="otherCollegesConsidered" value="3 to 5 others" /> 3 to 5 others</label>
+            <label><input type="radio" name="otherCollegesConsidered" value="More than 5" /> More than 5</label>
+          </div>
+          <small class="error" data-error-for="otherCollegesConsidered"></small>
+        </div>
+      </section>
+
+      <!-- ============================================================= -->
+      <!-- SECTION 5: Current Bachelor Degree Aspirations                -->
+      <!-- ============================================================= -->
+      <section class="card">
+        <h2 class="card-title">5. Current Bachelor Degree Aspirations</h2>
+
+        <div class="field full">
+          <label for="primaryInterest">Primary Area of Interest <span class="req">*</span></label>
+          <input type="text" id="primaryInterest" name="primaryInterest"
+                 placeholder="e.g. Software Development, Networking, Data Science, Finance, Marketing, Entrepreneurship" />
+          <small class="error" data-error-for="primaryInterest"></small>
+        </div>
+
+        <div class="field full">
+          <label>By the end of Bachelor degree, what does the student primarily want to achieve? <span class="req">*</span></label>
+          <div class="radio-row wrap">
+            <label><input type="radio" name="bachelorGoal" value="Secure a job in my field immediately after graduation" /> Secure a job in my field immediately after graduation</label>
+            <label><input type="radio" name="bachelorGoal" value="Start my own business or tech startup" /> Start my own business or tech startup</label>
+            <label><input type="radio" name="bachelorGoal" value="Pursue higher studies locally or abroad" /> Pursue higher studies locally or abroad</label>
+            <label><input type="radio" name="bachelorGoal" value="Engage in research and academic publications" /> Engage in research and academic publications</label>
+            <label><input type="radio" name="bachelorGoal" value="Clear professional certifications" /> Clear professional certifications</label>
+            <label><input type="radio" name="bachelorGoal" value="Other" id="bachelorGoalOther" /> Other</label>
+          </div>
+          <small class="error" data-error-for="bachelorGoal"></small>
+        </div>
+
+        <div class="field full hidden" id="otherBachelorGoalWrap">
+          <label for="otherBachelorGoal">Other Bachelor Goal <span class="req">*</span></label>
+          <input type="text" id="otherBachelorGoal" name="otherBachelorGoal" placeholder="Please specify" />
+          <small class="error" data-error-for="otherBachelorGoal"></small>
+        </div>
+
+        <div class="field full">
+          <label>What kind of support does the student expect from the college? <span class="req">*</span></label>
+          <div class="check-grid">
+            <label><input type="checkbox" name="expectedSupport" value="Regular Mentorship and Counseling" /> Regular Mentorship and Counseling</label>
+            <label><input type="checkbox" name="expectedSupport" value="Industry Internship Opportunities" /> Industry Internship Opportunities</label>
+            <label><input type="checkbox" name="expectedSupport" value="Career Placement Assistance" /> Career Placement Assistance</label>
+            <label><input type="checkbox" name="expectedSupport" value="Scholarships or Financial Aid" /> Scholarships or Financial Aid</label>
+            <label><input type="checkbox" name="expectedSupport" value="Skill Building Workshops and Training" /> Skill Building Workshops and Training</label>
+            <label><input type="checkbox" name="expectedSupport" value="Research and Project Support" /> Research and Project Support</label>
+            <label><input type="checkbox" name="expectedSupport" value="Extracurricular and Leadership Programs" /> Extracurricular and Leadership Programs</label>
+          </div>
+          <small class="error" data-error-for="expectedSupport"></small>
+        </div>
+
+        <div class="field full">
+          <label>Motivation Rating <span class="req">*</span></label>
+          <div class="radio-row wrap">
+            <label><input type="radio" name="motivationRating" value="1" /> 1 Very Low</label>
+            <label><input type="radio" name="motivationRating" value="2" /> 2 Low</label>
+            <label><input type="radio" name="motivationRating" value="3" /> 3 Moderate</label>
+            <label><input type="radio" name="motivationRating" value="4" /> 4 High</label>
+            <label><input type="radio" name="motivationRating" value="5" /> 5 Very High</label>
+          </div>
+          <small class="error" data-error-for="motivationRating"></small>
+        </div>
+      </section>
+
+      <!-- ============================================================= -->
+      <!-- SECTION 6: Skills and Extracurricular Activities              -->
+      <!-- ============================================================= -->
+      <section class="card">
+        <h2 class="card-title">6. Skills and Extracurricular Activities</h2>
+
+        <div class="field full">
+          <label>Interested Clubs <span class="req">*</span></label>
+          <div class="check-grid">
+            <label><input type="checkbox" name="interestedClubs" value="IT or Tech Club" /> IT or Tech Club</label>
+            <label><input type="checkbox" name="interestedClubs" value="Leadership and Entrepreneurship Club" /> Leadership and Entrepreneurship Club</label>
+            <label><input type="checkbox" name="interestedClubs" value="Athletic Club" /> Athletic Club</label>
+            <label><input type="checkbox" name="interestedClubs" value="Event Club" /> Event Club</label>
+            <label><input type="checkbox" name="interestedClubs" value="Robotics Club" /> Robotics Club</label>
+            <label><input type="checkbox" name="interestedClubs" value="Toastmasters Club" /> Toastmasters Club</label>
+          </div>
+          <small class="error" data-error-for="interestedClubs"></small>
+        </div>
+
+        <div class="field full">
+          <label>Existing Skills <span class="req">*</span></label>
+          <div class="check-grid">
+            <label><input type="checkbox" name="existingSkills" value="Basic Computer Skills" /> Basic Computer Skills</label>
+            <label><input type="checkbox" name="existingSkills" value="Programming" /> Programming</label>
+            <label><input type="checkbox" name="existingSkills" value="Graphic Design" /> Graphic Design</label>
+            <label><input type="checkbox" name="existingSkills" value="Video Editing" /> Video Editing</label>
+            <label><input type="checkbox" name="existingSkills" value="Public Speaking" /> Public Speaking</label>
+            <label><input type="checkbox" name="existingSkills" value="Leadership" /> Leadership</label>
+            <label><input type="checkbox" name="existingSkills" value="Content Writing" /> Content Writing</label>
+            <label><input type="checkbox" name="existingSkills" value="Research" /> Research</label>
+            <label><input type="checkbox" name="existingSkills" value="Sports" /> Sports</label>
+            <label><input type="checkbox" name="existingSkills" value="Other" id="skillsOther" /> Other</label>
+          </div>
+          <small class="error" data-error-for="existingSkills"></small>
+        </div>
+
+        <div class="field full hidden" id="otherSkillsWrap">
+          <label for="otherSkills">Other Skills <span class="req">*</span></label>
+          <input type="text" id="otherSkills" name="otherSkills" placeholder="Please specify" />
+          <small class="error" data-error-for="otherSkills"></small>
+        </div>
+      </section>
+
+      <!-- ============================================================= -->
+      <!-- SECTION 7: Official Remarks                                    -->
+      <!-- ============================================================= -->
+      <section class="card">
+        <h2 class="card-title">7. Official Remarks</h2>
+        <div class="grid">
+          <div class="field full">
+            <label for="overallRemarks">Overall Remarks of Student <span class="req">*</span></label>
+            <textarea id="overallRemarks" name="overallRemarks" rows="3"></textarea>
+            <small class="error" data-error-for="overallRemarks"></small>
+          </div>
+          <div class="field">
+            <label for="officialName">Name of Official <span class="req">*</span></label>
+            <input type="text" id="officialName" name="officialName" />
+            <small class="error" data-error-for="officialName"></small>
+          </div>
+          <div class="field">
+            <label for="interviewDate">Interview Date <span class="req">*</span></label>
+            <input type="date" id="interviewDate" name="interviewDate" />
+            <small class="error" data-error-for="interviewDate"></small>
+          </div>
+          <div class="field">
+            <label for="signatureName">Signature Name or Recorded By <span class="req">*</span></label>
+            <input type="text" id="signatureName" name="signatureName" />
+            <small class="error" data-error-for="signatureName"></small>
+          </div>
+        </div>
+      </section>
+
+      <!-- Submit / status area -->
+      <div id="statusMessage" class="status-message hidden"></div>
+
+      <div class="submit-bar">
+        <button type="button" id="clearBtn" class="btn btn-secondary">Clear Form</button>
+        <button type="submit" id="submitBtn" class="btn btn-primary">Save Student Record</button>
+      </div>
+
+    </form>
+  </main>
+
+  <!-- Scripts: locationData MUST load before script.js -->
+  <script src="locationData.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

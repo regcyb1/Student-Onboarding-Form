@@ -1,0 +1,275 @@
+/* =============================================================
+   Student Onboarding Entry System - style.css
+   Techspire style: deep red primary, light background, white cards.
+   Responsive: 2-column grid on desktop, single column on mobile.
+   ============================================================= */
+
+:root {
+  --primary: #9e1b1b;          /* deep red */
+  --primary-dark: #7a1414;
+  --primary-light: #c0392b;
+  --bg: #f4f5f7;               /* light page background */
+  --card-bg: #ffffff;
+  --text: #222831;
+  --text-muted: #6b7280;
+  --border: #d9dce1;
+  --border-focus: #9e1b1b;
+  --error: #c0392b;
+  --success: #1e7e34;
+  --radius: 10px;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+/* ---------- Header ---------- */
+.page-header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  padding: 28px 16px;
+  box-shadow: var(--shadow);
+}
+.header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+}
+.page-header h1 {
+  margin: 0 0 6px;
+  font-size: 1.8rem;
+}
+.page-header p {
+  margin: 0;
+  opacity: 0.92;
+  font-size: 1rem;
+}
+
+/* ---------- Layout ---------- */
+.container {
+  max-width: 960px;
+  margin: 24px auto 120px;
+  padding: 0 16px;
+}
+
+/* ---------- Section cards ---------- */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  margin-bottom: 24px;
+  border-top: 4px solid var(--primary);
+}
+.card-title {
+  margin: 0 0 20px;
+  font-size: 1.25rem;
+  color: var(--primary);
+}
+.sub-title {
+  margin: 22px 0 12px;
+  font-size: 1.05rem;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+/* ---------- Grid (2 columns desktop) ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.field.full,
+.field.checkbox-inline {
+  grid-column: 1 / -1;
+}
+
+/* ---------- Fields ---------- */
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4px;
+}
+.field label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 0.98rem;
+}
+.hint {
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+.req {
+  color: var(--error);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #fff;
+  color: var(--text);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(158, 27, 27, 0.12);
+}
+input:disabled,
+select:disabled {
+  background: #eceef1;
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+textarea {
+  resize: vertical;
+}
+
+/* ---------- Radio / checkbox rows ---------- */
+.radio-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.radio-row.wrap {
+  flex-wrap: wrap;
+  gap: 10px 20px;
+}
+.radio-row label,
+.check-grid label,
+.checkbox-inline label {
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+.check-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 18px;
+}
+input[type="checkbox"],
+input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+/* ---------- Error messages ---------- */
+.error {
+  color: var(--error);
+  font-size: 0.85rem;
+  margin-top: 5px;
+  min-height: 1em;
+}
+.field.invalid input,
+.field.invalid select {
+  border-color: var(--error);
+}
+
+/* ---------- Status message ---------- */
+.status-message {
+  padding: 14px 18px;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+.status-message.success {
+  background: #e6f4ea;
+  color: var(--success);
+  border: 1px solid #a7d7b6;
+}
+.status-message.error {
+  background: #fdecea;
+  color: var(--error);
+  border: 1px solid #f2b8b2;
+}
+
+/* ---------- Submit bar ---------- */
+.submit-bar {
+  position: sticky;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(4px);
+  border-top: 1px solid var(--border);
+  padding: 16px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin: 0 -16px -120px;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+}
+.btn {
+  padding: 12px 26px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+}
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+.btn-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+.btn-secondary {
+  background: #e9ebee;
+  color: var(--text);
+}
+.btn-secondary:hover {
+  background: #dcdfe4;
+}
+
+/* ---------- Utility ---------- */
+.hidden {
+  display: none !important;
+}
+
+/* ---------- Responsive: single column on mobile ---------- */
+@media (max-width: 640px) {
+  .grid,
+  .check-grid {
+    grid-template-columns: 1fr;
+  }
+  .page-header h1 {
+    font-size: 1.4rem;
+  }
+  .submit-bar {
+    flex-direction: column-reverse;
+  }
+  .btn {
+    width: 100%;
+  }
+}
