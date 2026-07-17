@@ -39,7 +39,7 @@ columns (left to right) are:
 
 ```
 Timestamp, Submission ID, Full Name, Student ID, Contact Number, Email Address,
-Permanent Province, Permanent District, Permanent Municipality,
+Blood Group, Permanent Province, Permanent District, Permanent Municipality,
 Temporary Province, Temporary District, Temporary Municipality,
 Plus Two College Name, Plus Two College Province, Plus Two College District,
 Stream, Other Stream, Computer Science Studied, GPA,
