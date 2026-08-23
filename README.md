@@ -189,3 +189,77 @@ other code changes are needed.
 | "Could not reach the server" | Check internet; re-copy the `/exec` URL; make sure access is **Anyone**. |
 | Nothing appears in the sheet | Confirm the tab is named `StudentResponses`; re-deploy after code edits. |
 | Changed the `.gs` code but nothing updates | **Deploy → Manage deployments → Edit → New version**. |
+
+
+Curl Test:
+curl -L -X POST \
+  "https://script.google.com/macros/s/AKfycbwOVOR13lHknh03akV7MAYhl9oooUDi_c9_ZT4Ws87EbzI5-YyrN2QJCUlzczous2Vv/exec" \
+  -H "Content-Type: text/plain;charset=utf-8" \
+  --data-binary @- <<'JSON'
+{
+  "fullName": "Test Student",
+  "studentId": "TS-TEST-001",
+  "contactNumber": "9800000001",
+  "email": "test.student@example.com",
+  "bloodGroup": "A+",
+
+  "permProvince": "Bagmati Province",
+  "permDistrict": "Kathmandu",
+  "permMunicipality": "Kathmandu Metropolitan City",
+
+  "tempProvince": "Bagmati Province",
+  "tempDistrict": "Lalitpur",
+  "tempMunicipality": "Lalitpur Metropolitan City",
+
+  "plusTwoCollege": "Test Plus Two College",
+  "plusTwoProvince": "Bagmati Province",
+  "plusTwoDistrict": "Kathmandu",
+  "stream": "Other",
+  "otherStream": "Computer Engineering",
+  "csStudied": "Yes",
+  "gpa": "3.75",
+
+  "prepAnything": "Yes",
+  "prepType": "Entrance, Abroad",
+  "prepInstitute": "Test Entrance Institute",
+  "abroadTest": "IELTS, SAT",
+  "prepCountry": "Australia",
+
+  "fatherName": "Test Father",
+  "fatherContact": "9800000002",
+  "fatherEmail": "father@example.com",
+  "fatherOccupation": "Business",
+
+  "motherName": "Test Mother",
+  "motherContact": "9800000003",
+  "motherEmail": "mother@example.com",
+  "motherOccupation": "Teacher",
+
+  "guardianContact": "9800000004",
+  "annualIncome": "NPR 6 Lakhs to 10 Lakhs",
+  "siblingsDetails": "2 siblings - one in Bachelor, one in Grade 10",
+
+  "discoverySources": "Social Media and Website, Friends, Family, or Seniors, Other",
+  "otherDiscovery": "College seminar",
+
+  "enrollmentFactors": "Affordable Fee, Location and Accessibility, Scholarship Offered",
+  "otherCollegesConsidered": "1 to 2 others",
+
+  "primaryInterest": "Software Development",
+  "bachelorGoal": "Other",
+  "otherBachelorGoal": "Build a software company",
+
+  "expectedSupport": "Career Placement Assistance, Industry Internship Opportunities",
+  "motivationRating": "5",
+
+  "interestedClubs": "IT or Tech Club, Robotics Club",
+  "existingSkills": "Programming, Basic Computer Skills, Other",
+  "otherSkills": "UI Design",
+
+  "overallRemarks": "This is a curl test submission.",
+  "officialName": "Test Official",
+  "interviewDate": "2026-07-17",
+  "signatureName": "Test Official",
+  "recordedBy": "Test Official"
+}
+JSON
