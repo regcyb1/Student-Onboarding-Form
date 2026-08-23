@@ -13,7 +13,7 @@
    STEP 1: Paste your deployed Google Apps Script Web App URL here.
    See README.md for how to deploy and copy this URL.
    ------------------------------------------------------------- */
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwOVOR13lHknh03akV7MAYhl9oooUDi_c9_ZT4Ws87EbzI5-YyrN2QJCUlzczous2Vv/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxhlyfqaURuz6ldKMaG-0jyJ6Vp-MyRF6xTwsSAZqD2Js_3VRI3rzD-Rcgo9wBK-iCL/exec";
 
 // ------------------------------------------------------------------
 // Dependent Location Dropdowns
